@@ -1,14 +1,15 @@
-require "./spec_helper"
 require "../src/version"
+require "./spec_helper"
 
 unless File.executable?(File.join(ROOT, "crun"))
-  print "crun build needed… "
-  if Dir.cd(ROOT) { system("make crun") }
-    puts "\033[1;49;92mdone\033[0m"
-  else
-    puts "\033[1;49;91mfailed\033[0m"
+  puts "crun build needed… "
+
+  unless Dir.cd(ROOT) { system("make crun") }
+    puts "build \033[1;49;91mfailed\033[0m"
     exit(1)
   end
+
+  puts "build \033[1;49;92mdone\033[0m"
 end
 
 def crun(args : Array(String) = [] of String,
