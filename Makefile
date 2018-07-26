@@ -1,5 +1,6 @@
 .POSIX:
 
+SHARDS = shards
 CRYSTAL = crystal
 CRFLAGS =
 SOURCES = src/*.cr
@@ -14,11 +15,18 @@ pwd = $(shell pwd)
 
 all: help
 
+bin/ameba:
+	$(SHARDS) install
+
+check: bin/ameba ## Run Ameba static code check
+	./bin/ameba
+
 clean: ## Remove crun builded binary
 	rm -f crun
 
 clobber: clean ## Clean and remove editor backup files (*~)
 	find . -type f -name \*~ -exec rm -f {} \+
+	rm -rf bin lib
 
 crun: $(SOURCES) ## Build crun binary
 	$(CRYSTAL) build src/main.cr -o crun $(CRFLAGS)

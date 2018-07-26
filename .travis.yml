@@ -17,4 +17,5 @@ before_script: |
   PREFIX="${HOME}" sudo make uninstall
 
 script:
+  - make check
   - make spec
