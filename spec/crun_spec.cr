@@ -85,4 +85,6 @@ describe :crun do
       error.close
     end
   end
+
+  # TODO: add build of some sample codes as e2e spec
 end
