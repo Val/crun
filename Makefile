@@ -40,9 +40,6 @@ help: ## Show this help
 install: crun ## Install crun binary
 	$(INSTALL) -m 0755 crun "$(BINDIR)"
 
-uninstall: ## Uninstall crun binary
-	rm -f "$(BINDIR)/crun"
-
 format: ## Run Crystal format tool
 	$(CRYSTAL) tool format -i src -i spec
 
@@ -55,3 +52,6 @@ spec: $(SPECS) crun ## Run crun specs
 todo: ## Show fixme and todo comments
 	@find . -type f -name \*.cr -exec \
 		egrep --color=auto -e '(TODO|FIXME):' {} \+ 2> /dev/null || true
+
+uninstall: ## Uninstall crun binary
+	rm -f "$(BINDIR)/crun"
