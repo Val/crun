@@ -63,4 +63,26 @@ describe :crun do
     output.close
     error.close
   end
+
+  it "fail and print usage when invalid source argument" do
+    %w[/nonexistant /etc/shadow].each do |path|
+      output, error = IO::Memory.new, IO::Memory.new
+
+      status = crun(args: [path], error: error, output: output)
+
+      output.empty?.should eq(true)
+      error.to_s.should(
+        eq(
+          <<-EOSTDOUT
+          Crun::InvalidSourceError: Cannot read #{path} Crystal source
+          #{usage}
+          EOSTDOUT
+        )
+      )
+      status.success?.should eq(false)
+
+      output.close
+      error.close
+    end
+  end
 end
