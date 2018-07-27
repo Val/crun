@@ -1,4 +1,6 @@
 require "./version"
 
-# TODO: Add --version support
-STDOUT.puts "crun #{Crun::VERSION}"
+if ARGV[0]?.try { |arg| arg.match(/^-(v|-version)$/) }
+  STDOUT.puts "crun #{Crun::VERSION}"
+  exit(0)
+end

@@ -32,16 +32,18 @@ end
 
 describe :crun do
   it "show version" do
-    output, error = IO::Memory.new, IO::Memory.new
+    %w[-v --version].each do |arg|
+      output, error = IO::Memory.new, IO::Memory.new
 
-    status = crun(error: error, output: output)
+      status = crun(args: [arg], error: error, output: output)
 
-    error.to_s.should eq("")
-    output.to_s.should eq("crun #{Crun::VERSION}\n")
-    error.empty?.should eq(true)
-    status.success?.should eq(true)
+      error.to_s.should eq("")
+      output.to_s.should eq("crun #{Crun::VERSION}\n")
+      error.empty?.should eq(true)
+      status.success?.should eq(true)
 
-    output.close
-    error.close
+      output.close
+      error.close
+    end
   end
 end
