@@ -11,4 +11,7 @@ module Crun
     def initialize(@message = "Cannot read #{SOURCE} Crystal source")
     end
   end
+
+  class CacheError < Error
+  end
 end
