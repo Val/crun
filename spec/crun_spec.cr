@@ -31,6 +31,8 @@ def crun(args : Array(String) = [] of String,
 end
 
 describe :crun do
+  usage = "usage: crun <source file> [...]\n"
+
   it "show version" do
     %w[-v --version].each do |arg|
       output, error = IO::Memory.new, IO::Memory.new
@@ -45,5 +47,20 @@ describe :crun do
       output.close
       error.close
     end
+  end
+
+  it "fail and print usage when no arguments" do
+    output, error = IO::Memory.new, IO::Memory.new
+
+    status = crun(error: error, output: output)
+
+    output.empty?.should eq(true)
+    error.to_s.should(
+      eq("Crun::NoArgumentError: Missing at least one argument\n#{usage}")
+    )
+    status.success?.should eq(false)
+
+    output.close
+    error.close
   end
 end
