@@ -4,18 +4,16 @@ os:
   - linux
   - osx
 
-before_script: |
-  make clean
-  make clobber
-  make crun
-  make format
-  make help
-  mkdir -p "${HOME}/bin"
-  PREFIX="${HOME}" make install
-  make release
-  make todo
-  PREFIX="${HOME}" sudo make uninstall
-
 script:
+  - make clean
+  - make clobber
+  - make format
+  - make crun
+  - make help
+  - mkdir -p ./bin
+  - PREFIX=. make install
+  - make release
+  - make todo
+  - PREFIX=. make uninstall
   - make check
   - make spec
