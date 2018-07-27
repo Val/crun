@@ -1,14 +1,14 @@
 .POSIX:
 
-SHARDS = shards
-CRYSTAL = crystal
-CRFLAGS =
+SHARDS ?= shards
+CRYSTAL ?= crystal
+CRFLAGS ?=
 SOURCES = src/*.cr
 SPECS = spec/*.cr
 
-DESTDIR =
-PREFIX = /usr/local
-BINDIR = $(DESTDIR)$(PREFIX)/bin
+DESTDIR ?=
+PREFIX ?= /usr/local
+BINDIR ?= $(DESTDIR)$(PREFIX)/bin
 INSTALL = /usr/bin/install
 
 pwd = $(shell pwd)
