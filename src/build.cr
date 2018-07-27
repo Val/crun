@@ -15,9 +15,18 @@ module Crun
   private def self.compile : ErrorHash | Nil
     return if build?
 
-    Dir.cd(build_dir) do
-      build_subprocess("crystal", ["build", "-o", build_path, SOURCE])
+    hash = nil
+
+    hash = Dir.cd(build_dir) do
+      if shards_yaml
+        build_shards_config
+        hash = build_subprocess("shards", %w[install])
+      end
+
+      hash || build_subprocess("crystal", ["build", "-o", build_path, SOURCE])
     end
+
+    return hash if hash
   end
 
   private def self.build?
