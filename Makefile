@@ -84,7 +84,7 @@ dev4osx: ## Prepare for dev. on Osx
 	brew tap veelenga/tap
 	brew install ameba crystal fswatch imagemagick terminal-notifier
 
-githook:
+githook: ## Install Git pre-commit hook
 	@printf "#!/bin/sh\nmake tests\n" > .git/hooks/pre-commit
 	@chmod a+rx .git/hooks/pre-commit
 
