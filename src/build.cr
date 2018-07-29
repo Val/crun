@@ -44,8 +44,8 @@ module Crun
     status = Process.run(
       command: command,
       args: args,
-      clear_env: true,
-      shell: false,
+      clear_env: false,
+      shell: true,
       input: input,
       output: output,
       error: error
