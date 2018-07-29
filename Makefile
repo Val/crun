@@ -31,6 +31,10 @@ clobber: clean ## Clean and remove editor backup files (*~)
 crun: $(SOURCES) ## Build crun binary
 	$(CRYSTAL) build src/main.cr -o crun $(CRFLAGS)
 
+githook:
+	@printf "#!/bin/sh\nmake tests\n" > .git/hooks/pre-commit
+	@chmod a+rx .git/hooks/pre-commit
+
 help: ## Show this help
 	@printf '\033[32mtargets:\033[0m\n'
 	@grep -E '^[a-zA-Z _-]+:.*?## .*$$' $(MAKEFILE_LIST) |\
