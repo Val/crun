@@ -52,6 +52,13 @@ sign: release
 spec: $(SPECS) crun ## Run crun specs
 	$(CRYSTAL) spec
 
+tests: ## Run tests suite
+	@+make --no-print-directory format && \
+	make --no-print-directory clean && \
+	make --no-print-directory crun && \
+	make --no-print-directory spec && \
+	make --no-print-directory check
+
 todo: ## Show fixme and todo comments
 	@find . -type f -name \*.cr -exec \
 		egrep --color=auto -e '(TODO|FIXME):' {} \+ 2> /dev/null || true
