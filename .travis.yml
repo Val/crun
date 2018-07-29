@@ -5,15 +5,12 @@ os:
   - osx
 
 script:
-  - make clean
-  - make clobber
-  - make format
-  - make crun
   - make help
+  - make todo
+  - make tests
+  - make clobber
+  - make release
+  - make sign
   - mkdir -p ./bin
   - PREFIX=. make install
-  - make release
-  - make todo
   - PREFIX=. make uninstall
-  - make check
-  - make spec
