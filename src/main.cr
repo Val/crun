@@ -1,6 +1,9 @@
+require "./build"
+require "./cache"
 require "./config"
 require "./crun"
 require "./errors"
+require "./lock"
 require "./version"
 
 if ARGV[0]?.try { |arg| arg.match(/^-(v|-version)$/) }

@@ -5,5 +5,9 @@ module Crun
     unless File.exists?(SOURCE) && File.readable?(SOURCE)
       raise InvalidSourceError.new
     end
+
+    with_lock do
+      # TODO: build (compile)
+    end
   end
 end
