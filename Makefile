@@ -107,7 +107,7 @@ release: $(SOURCES) ## Build crun binary
 	$(CRYSTAL) build src/main.cr --release --no-debug -o crun $(CRFLAGS)
 
 sign: release
-	sha256sum crun > crun.sha256
+	shasum -a256 crun > crun.sha256
 
 spec: $(SPECS) crun ## Run crun specs
 	$(CRYSTAL) spec
