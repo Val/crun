@@ -1,4 +1,6 @@
 module Crun
+  alias ErrorHash = NamedTuple(command: String, stdout: String, stderr: String)
+
   class Error < ::Exception
   end
 
@@ -13,5 +15,8 @@ module Crun
   end
 
   class CacheError < Error
+  end
+
+  class BuildError < Error
   end
 end
