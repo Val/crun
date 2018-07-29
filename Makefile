@@ -71,7 +71,7 @@ check: bin/ameba ## Run Ameba static code check
 	./bin/ameba
 
 clean: ## Remove crun builded binary
-	rm -f crun
+	rm -f crun crun.sha256
 
 clobber: clean ## Clean and remove editor backup files (*~)
 	find . -type f -name \*~ -exec rm -f {} \+
