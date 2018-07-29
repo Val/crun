@@ -4,5 +4,5 @@ module Crun
 
   ARGS = ARGV.size > 1 ? ARGV[1..ARGV.size] : [] of String
 
-  CLEAN_CACHE_DAYS = ENV["CRUN_CLEAN_CACHE_DAYS"]?.try { |v| v.as?(Int32) } || 1
+  CLEAN_CACHE_DAYS = ENV["CRUN_CLEAN_CACHE_DAYS"]?.try { |v| v.as?(Int32) } || 7
 end
