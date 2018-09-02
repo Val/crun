@@ -8,7 +8,7 @@ targets:
   crun:
     main: src/crun.cr
 
-crystal: 0.25.1
+crystal: 0.26.1
 
 development_dependencies:
   ameba:
