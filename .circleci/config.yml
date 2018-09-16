@@ -1,0 +1,26 @@
+---
+version: 2
+
+jobs:
+  test:
+    machine: true
+    steps:
+      - run: curl -sSL https://dist.crystal-lang.org/apt/setup.sh | sudo bash
+      - run: sudo apt install -y crystal
+      - checkout
+      - run: make help
+      - run: make todo
+      - run: make tests
+      - run: make clobber
+      - run: make release
+      - run: make sign
+      - run: mkdir -p ./bin
+      - run: PREFIX=. make install
+      - run: PREFIX=. make uninstall
+
+workflows:
+  version: 2
+  ci:
+    jobs:
+      - test
+...
