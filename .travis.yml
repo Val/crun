@@ -1,5 +1,7 @@
 language: crystal
 
+dist: xenial
+
 os:
   - linux
   - osx
