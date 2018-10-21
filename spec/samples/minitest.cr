@@ -1,6 +1,7 @@
 # ---
 # minitest:
 #   github: ysbaddaden/minitest.cr
+#   version: <= 0.4.0
 # ...
 
 class Foo
