@@ -45,7 +45,7 @@ Hello world!
     `CLEAN_CACHE_DAYS`
   * replace the process rather than using a child
   * pass arguments to the compiled application properly
-  * handle well shards with comment containing `depencies` of a
+  * handle well shards with comment containing `dependencies` of a
     classical `shards.yml` file. Anchors used can be changed by settings
     `CRUN_SHARDS_START_ANCHOR` (default: `---`) and
     `CRUN_SHARD_END_ANCHOR` (default: `...`).
