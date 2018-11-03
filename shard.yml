@@ -6,7 +6,7 @@ authors:
 
 targets:
   crun:
-    main: src/crun.cr
+    main: src/main.cr
 
 crystal: 0.27.0
 
