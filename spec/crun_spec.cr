@@ -95,25 +95,23 @@ describe :crun do
   end
 
   it "fail and print usage when build unsuccessful" do
-    tempfile = Tempfile.open("foo") do |file|
-      file.puts <<-EOCRYSTAL
-      puts 'invalid crystal code'
-      EOCRYSTAL
-      file.close
-      file_path = file.path
-
-      output, error = IO::Memory.new, IO::Memory.new
-
-      status = crun(args: [file_path], error: error, output: output)
-
-      output.empty?.should eq(true)
-
-      error.to_s.should(match(/#{build_error_regex(file_path)}/))
-      status.success?.should eq(false)
-
-      output.close
-      error.close
+    tempfile = File.tempfile("foo") do |file|
+      file.puts("puts 'invalid crystal code'")
     end
+
+    file_path = tempfile.path
+
+    output, error = IO::Memory.new, IO::Memory.new
+
+    status = crun(args: [file_path], error: error, output: output)
+
+    output.empty?.should eq(true)
+
+    error.to_s.should(match(/#{build_error_regex(file_path)}/))
+    status.success?.should eq(false)
+
+    output.close
+    error.close
   ensure
     tempfile.delete if tempfile
   end
