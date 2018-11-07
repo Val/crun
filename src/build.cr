@@ -2,7 +2,7 @@ module Crun
   @@build_dir : String | Nil
 
   def self.build_path
-    @@build_path ||= "#{build_dir}/#{SOURCE_FILENAME}"
+    @@build_path ||= "#{build_dir}/#{SOURCE_FILENAME}.crystal"
   end
 
   def self.build_dir
