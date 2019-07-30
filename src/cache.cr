@@ -27,7 +27,7 @@ module Crun
 
     return if pathes.empty?
 
-    limit = Time.utc_now - Time::Span.new(CLEAN_CACHE_DAYS, 0, 0, 0)
+    limit = Time.utc - Time::Span.new(CLEAN_CACHE_DAYS, 0, 0, 0)
 
     pathes.keys.select { |key| key < limit }.sort_by { |key| key }.each do |key|
       pathes[key].each { |path| FileUtils.rm_rf(path) }
