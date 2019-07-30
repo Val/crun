@@ -1,5 +1,6 @@
 [![Travis-CI Build Status](https://travis-ci.org/Val/crun.svg?branch=master)](https://travis-ci.org/Val/crun)
 [![CircleCI Build Status](https://circleci.com/gh/Val/crun.svg?style=shield)](https://circleci.com/gh/Val/crun)
+[![Release](https://img.shields.io/github/release/Val/crun.svg?maxAge=360)](https://github.com/Val/crun/releases)
 
 # crun
 Crystal Run : shebang wrapper for Crystal
