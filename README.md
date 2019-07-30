@@ -185,3 +185,4 @@ apt install -y -q inotify-tools libnotify-bin
 ## Contributors
 
 - [Val](https://github.com/Val) Laurent Vallar - creator, maintainer
+- [bew](https://github.com/bew) Benoit de Chezelles
