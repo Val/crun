@@ -6,7 +6,7 @@ UNAME = $(shell uname)
 
 SHARDS ?= shards
 CRYSTAL ?= crystal
-CRFLAGS ?= --warnings all --error-on-warnings
+CRFLAGS ?= --warnings all --error-on-warnings --error-trace
 SOURCES = src/*.cr
 SPECS = spec/*.cr
 
