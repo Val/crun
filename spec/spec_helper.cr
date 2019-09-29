@@ -1,7 +1,6 @@
 require "../src/cache"
 require "../src/config"
 require "../src/errors"
-require "spec"
 
 ROOT = File.expand_path(File.join(File.dirname(__FILE__), ".."))
 
@@ -12,3 +11,5 @@ Dir.mkdir(SPEC_LOCAL_CACHE_PATH)
 Crun.cache_path = SPEC_LOCAL_CACHE_PATH
 
 at_exit { FileUtils.rm_rf(SPEC_LOCAL_CACHE_PATH) }
+
+require "spec"
