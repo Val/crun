@@ -8,7 +8,7 @@ describe :cache do
     Dir.mkdir(spec_recent_path)
     Dir.mkdir(spec_old_path)
 
-    File.touch(spec_old_path, Time.utc_now - (Crun::CLEAN_CACHE_DAYS + 1).days)
+    File.touch(spec_old_path, Time.utc - (Crun::CLEAN_CACHE_DAYS + 1).days)
 
     Crun.clean_cache
 
