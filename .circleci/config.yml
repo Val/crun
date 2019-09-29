@@ -3,10 +3,9 @@ version: 2
 
 jobs:
   test:
-    machine: true
+    docker:
+      - image: crystallang/crystal:latest
     steps:
-      - run: curl -sSL https://dist.crystal-lang.org/apt/setup.sh | sudo bash
-      - run: sudo apt install -y crystal
       - checkout
       - run: make help
       - run: make todo

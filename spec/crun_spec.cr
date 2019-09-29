@@ -73,7 +73,7 @@ describe :crun do
   end
 
   it "fail and print usage when invalid source argument" do
-    %w[/nonexistant /etc/shadow].each do |path|
+    %w[/nonexistant /proc/slabinfo].each do |path|
       output, error = IO::Memory.new, IO::Memory.new
 
       status = crun(args: [path], error: error, output: output)
