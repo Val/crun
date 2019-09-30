@@ -5,11 +5,14 @@ module Crun
     @@build_path ||= "#{build_dir}/#{SOURCE_FILENAME}.crystal"
   end
 
+  def self.build_name(path : String)
+    "#{System.hostname}_#{path.gsub(/[^a-zA-Z0-9]/, "_")}"
+  end
+
   def self.build_dir
-    @@build_dir ||= File.join(
-      cache_path,
-      "#{System.hostname}_#{SOURCE.gsub(/[^a-zA-Z0-9]/, "_")}"
-    ).tap { |path| Dir.mkdir(path) unless File.directory?(path) }
+    @@build_dir ||=
+      File.join(cache_path, build_name(SOURCE))
+        .tap { |path| Dir.mkdir(path) unless File.directory?(path) }
   end
 
   private def self.compile : ErrorHash | Nil
@@ -19,8 +22,14 @@ module Crun
 
     hash = Dir.cd(build_dir) do
       if shards_yaml
-        build_shards_config
-        hash = build_subprocess("shards", %w[install])
+        current =
+          File.read(shards_config_path) if File.exists?(shards_config_path)
+
+        # build shard.yml and install shards if none or outdated
+        if current.nil? || !current.match(/#{shards_yaml}/m)
+          build_shards_config
+          hash = build_subprocess("shards", %w[install])
+        end
       end
 
       hash || build_subprocess("crystal", ["build", "-o", build_path, SOURCE])

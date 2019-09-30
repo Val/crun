@@ -20,7 +20,10 @@ def crun(args : Array(String) = [] of String,
   Process.run(
     command: "./crun",
     args: args,
-    env: {"HOME" => ENV.fetch("HOME")},
+    env: {
+      "HOME"            => ENV.fetch("HOME"),
+      "CRUN_CACHE_PATH" => SPEC_LOCAL_CACHE_PATH,
+    },
     clear_env: true,
     shell: true,
     input: input,
@@ -143,6 +146,25 @@ describe :crun do
       error.to_s.should(eq(stderr)) if has_stderr
 
       status.success?.should(eq(sample_path.match(/false\.cr$/).nil?))
+
+      shards_config_path =
+        File.join(Crun.cache_path, Crun.build_name(sample_path), "shard.yml")
+
+      if File.exists?(shards_config_path) # check shard.yml not rebuilded
+        modification_time = File.info(shards_config_path).modification_time
+
+        status = crun(
+          args: [sample_path, args].flatten,
+          error: error,
+          output: output
+        )
+
+        status.success?.should(eq(sample_path.match(/false\.cr$/).nil?))
+
+        File.info(shards_config_path)
+          .modification_time
+          .should(eq(modification_time))
+      end
 
       output.close
       error.close

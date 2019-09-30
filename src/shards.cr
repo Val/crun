@@ -19,7 +19,7 @@ module Crun
   end
 
   def self.build_shards_config
-    File.open(File.join(build_dir, "shard.yml"), "w") do |file|
+    File.open(shards_config_path, "w") do |file|
       file.puts <<-EOYAML
       ---
       name: #{SOURCE_FILENAME}
@@ -29,5 +29,9 @@ module Crun
       ...
       EOYAML
     end
+  end
+
+  def self.shards_config_path
+    @@shards_config_path ||= "#{File.join(build_dir, "shard.yml")}"
   end
 end
