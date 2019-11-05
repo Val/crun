@@ -170,4 +170,36 @@ describe :crun do
       error.close
     end
   end
+
+  it "works with pipe samples" do
+    Dir.cd(PIPE_SAMPLES_DIR) do
+      Dir.glob(File.join(PIPE_SAMPLES_DIR, "*.sh")).each do |sample_path|
+        input = Process::Redirect::Pipe
+        output, error = IO::Memory.new, IO::Memory.new
+
+        status = Process.run(
+          command: "sh",
+          args: [sample_path],
+          env: {
+            "HOME"            => ENV.fetch("HOME"),
+            "CRUN_CACHE_PATH" => SPEC_LOCAL_CACHE_PATH,
+            "PATH"            => [
+              ROOT,
+              PIPE_SAMPLES_DIR,
+              ENV.fetch("PATH"),
+            ].compact.join(":"),
+          },
+          clear_env: true,
+          shell: true,
+          input: input,
+          output: output,
+          error: error,
+          chdir: PIPE_SAMPLES_DIR,
+        )
+
+        error.empty?.should eq(true)
+        status.success?.should(eq(true))
+      end
+    end
+  end
 end
