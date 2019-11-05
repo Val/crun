@@ -200,7 +200,10 @@ describe :crun do
           chdir: PIPE_SAMPLES_DIR,
         )
 
-        error.empty?.should eq(true)
+        error_empty = error.empty?
+        STDERR.puts("error:\n#{error}") unless error_empty
+
+        error_empty.should eq(true)
         status.success?.should(eq(true))
       end
     end
