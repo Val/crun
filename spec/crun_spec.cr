@@ -23,6 +23,7 @@ def crun(args : Array(String) = [] of String,
     env: {
       "HOME"            => ENV.fetch("HOME"),
       "CRUN_CACHE_PATH" => SPEC_LOCAL_CACHE_PATH,
+      "CRYSTAL_SPEC"    => "1",
     },
     clear_env: false,
     shell: true,
@@ -35,7 +36,8 @@ end
 
 def build_error_regex(path)
   <<-EOREGEX
-  ^Crun::BuildError: Build failed: crystal build -o .+ #{Regex.escape(path)}
+  ^Crun::BuildError: Build failed: crystal build --debug --error-on-warnings \
+--error-trace -o .+ #{Regex.escape(path)}
 
   STDOUT:
   EOREGEX
@@ -183,6 +185,7 @@ describe :crun do
           env: {
             "HOME"            => ENV.fetch("HOME"),
             "CRUN_CACHE_PATH" => SPEC_LOCAL_CACHE_PATH,
+            "CRYSTAL_SPEC"    => "1",
             "PATH"            => [
               ROOT,
               PIPE_SAMPLES_DIR,

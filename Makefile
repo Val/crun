@@ -110,7 +110,7 @@ sign: release
 	shasum -a256 crun > crun.sha256
 
 spec: $(SPECS) crun ## Run crun specs
-	$(CRYSTAL) spec
+	$(CRYSTAL) spec --debug --warnings all --error-on-warnings --error-trace
 
 tests: ## Run tests suite
 	@+$(call make_notify,format,format) && \

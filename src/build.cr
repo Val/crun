@@ -20,7 +20,7 @@ module Crun
 
     hash = nil
 
-    hash = Dir.cd(build_dir) do
+    Dir.cd(build_dir) do
       if shards_yaml
         current =
           File.read(shards_config_path) if File.exists?(shards_config_path)
@@ -32,7 +32,17 @@ module Crun
         end
       end
 
-      hash || build_subprocess("crystal", ["build", "-o", build_path, SOURCE])
+      unless hash
+        args = %w[build]
+
+        if ENV.has_key?("CRYSTAL_SPEC")
+          args.concat(%w[--debug --error-on-warnings --error-trace])
+        end
+
+        args.concat(["-o", build_path, SOURCE])
+
+        hash = build_subprocess("crystal", args)
+      end
     end
 
     return hash if hash
