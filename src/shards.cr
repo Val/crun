@@ -19,15 +19,17 @@ module Crun
   end
 
   def self.build_shards_config
-    File.open(shards_config_path, "w") do |file|
-      file.puts <<-EOYAML
-      ---
-      name: #{SOURCE_FILENAME}
-      version: 0.1.0
-      dependencies:
-      #{shards_yaml}
-      ...
-      EOYAML
+    with_lock do
+      File.open(shards_config_path, "w") do |file|
+        file.puts <<-EOYAML
+        ---
+        name: #{SOURCE_FILENAME}
+        version: 0.1.0
+        dependencies:
+        #{shards_yaml}
+        ...
+        EOYAML
+      end
     end
   end
 
