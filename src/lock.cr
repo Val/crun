@@ -17,7 +17,11 @@ module Crun
 
   private def self.unlock
     lockfile.flock_unlock
-    File.delete(lockfile.path)
+    begin
+      File.delete(lockfile.path)
+    rescue error : Errno
+      raise error unless error.errno == Errno::ENOENT
+    end
     @@lockfile = nil
   end
 end
