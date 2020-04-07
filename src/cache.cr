@@ -59,7 +59,7 @@ module Crun
       begin
         Dir.mkdir_p(path)
         return path
-      rescue Errno
+      rescue File::Error
       end
     end
 

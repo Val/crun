@@ -14,7 +14,7 @@ describe :lock do
 
       File.exists?(path).should eq(true)
 
-      expect_raises(Errno, Errno::EWOULDBLOCK) do
+      expect_raises(IO::Error) do
         File.new(path).flock_exclusive(false)
       end
     end
