@@ -19,8 +19,8 @@ module Crun
     lockfile.flock_unlock
     begin
       File.delete(lockfile.path)
-    rescue error : Errno
-      raise error unless error.errno == Errno::ENOENT
+    rescue error : File::Error
+      raise error unless error.class == File::NotFoundError
     end
     @@lockfile = nil
   end
