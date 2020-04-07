@@ -1,6 +1,7 @@
 # ---
 # minitest:
 #   github: ysbaddaden/minitest.cr
+#   branch: master
 # ...
 
 class Foo
