@@ -3,7 +3,7 @@ language: crystal
 crystal:
   - latest
 
-dist: bionic
+dist: focal
 
 os:
   - linux
