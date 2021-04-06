@@ -13,8 +13,8 @@ module Crun
     @@shards_yaml ||= (
       File.read(SOURCE)
         .match(SHARDS_YAML_REGEX)
-        .try { |md| md[1]? }
-        .try { |text| text.gsub(/^# /m, "    ") }
+        .try(&.[1]?)
+        .try(&.gsub(/^# /m, "    "))
     )
   end
 

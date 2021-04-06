@@ -29,7 +29,7 @@ module Crun
 
     limit = Time.utc - Time::Span.new(days: CLEAN_CACHE_DAYS)
 
-    pathes.keys.select { |key| key < limit }.sort_by { |key| key }.each do |key|
+    pathes.keys.select { |key| key < limit }.sort!.each do |key|
       pathes[key].each { |path| FileUtils.rm_rf(path) }
     end
   end
