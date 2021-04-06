@@ -11,8 +11,14 @@ module Crun
 
   def self.build_dir
     @@build_dir ||=
-      File.join(cache_path, build_name(SOURCE))
-        .tap { |path| Dir.mkdir(path) unless File.directory?(path) }
+      File.join(cache_path, build_name(SOURCE)).tap do |path|
+        Dir.mkdir(path) unless File.directory?(path)
+      rescue error : File::AlreadyExistsError
+        # Possible concurrent call, check if readable/executable directory
+        unless Dir.exists?(path) && Dir.children(path).is_a?(Array(String))
+          raise error
+        end
+      end
   end
 
   private def self.compile : ErrorHash | Nil
