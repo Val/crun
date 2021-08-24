@@ -1,5 +1,11 @@
 language: crystal
 
+before_install:
+  - curl -fsSL https://download.opensuse.org/repositories/devel:languages:crystal/Debian_10/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/crystal.gpg > /dev/null
+  - echo "deb http://download.opensuse.org/repositories/devel:/languages:/crystal/Debian_10/ /" | sudo tee /etc/apt/sources.list.d/crystal.list
+  - sudo apt -qy update
+  - sudo apt -qy install crystal
+
 crystal:
   - latest
 

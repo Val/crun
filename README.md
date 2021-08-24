@@ -1,4 +1,4 @@
-[![Travis-CI Build Status](https://travis-ci.org/Val/crun.svg?branch=master)](https://travis-ci.org/Val/crun)
+[![Travis-CI Build Status](https://app.travis-ci.com/Val/crun.svg?branch=master)](https://app.travis-ci.com/Val/crun)
 [![CircleCI Build Status](https://circleci.com/gh/Val/crun.svg?style=shield)](https://circleci.com/gh/Val/crun)
 [![Release](https://img.shields.io/github/release/Val/crun.svg?maxAge=360)](https://github.com/Val/crun/releases)
 
