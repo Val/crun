@@ -1,3 +1,5 @@
+require "env"
+
 module Crun
   def self.run
     raise NoArgumentError.new if SOURCE.empty?
@@ -30,7 +32,10 @@ module Crun
       )
     end
 
-    # TODO: set ::PROGRAM_NAME = [SOURCE_FILENAME, ARGS].flatten.join(' ') ?
-    Process.exec(build_path, ARGS)
+    env = ENV.to_h.tap do |e|
+      e["PROGRAM_NAME"] = [SOURCE_FILENAME, ARGS].flatten.join(" ")
+    end
+
+    Process.exec(build_path, ARGS, env: env)
   end
 end

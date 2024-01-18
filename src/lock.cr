@@ -5,7 +5,7 @@ module Crun
     lockfile.path
   end
 
-  def self.with_lock(&block)
+  def self.with_lock(&)
     lockfile.flock_exclusive { yield }
   ensure
     unlock
